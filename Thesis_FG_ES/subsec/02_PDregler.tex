@@ -1,2 +1,36 @@
 \subsection{PD Regler}
 \label{subsec:02PDregler}
+%Formel PD-Regler (Formel/Code), Simulationen, (Ackermann), Probleme 
+
+Ein einfacher Ansatz f\"ur den Rundkurs ohne Hindernisse ist die Abstandregelung mit Hilfe der Ultraschallsensoren und einem PID Regler. Die zu regelnde Gr\"o\ss{}e ist der Abstand zur Wand, als Stellgr\"o\ss{}e dient der Lenkwinkel. Dazu kann entweder die Stellgr\"o\ss{}e f\"ur den Lenkwinkel geregelt werden oder der Lenkwinkel selbst und dann auf die Stellgr\"o\ss{}e mit dem Lenkwinkelmodell umgerechnet werden. Die Reglerauslegung ist sowohl per Simulation in Simulink als auch experimentell durchgef\"uhrt worden. \\
+Die Simulation beruht auf dem Ackermann-Modell, einem Einspurmodell f\"ur Fahrzeuge. Es lautet
+\begin{align} %TODO Ausrichtung
+	\dot{\varphi}_\text{K} &= \frac{v}{l}\cdot\tan\varphi_\text{L}\\
+	\dot{y} &= v \cdot \sin \varphi_\text{K}+v\cdot\frac{l_\text{H}}{l}\cdot\cos\varphi_\text{K}\cdot\tan\varphi_\text{L}.
+\end{align}
+Durch Linearisierung erh\"alt man
+\begin{align}
+	\dot{\varphi}_\text{K} &= \frac{v}{l}\cdot\varphi_\text{L}\\
+	\dot{y} &= v\cdot\varphi_\text{K}+v\cdot\frac{l_\text{H}}{l}\cdot\varphi_\text{L}.
+\end{align}
+Dabei ist $\varphi_\text{K}$ der Kurswinkel, $\varphi_\text{L}$ der Lenkwinkel, $v$ die Geschwindigkeit des Fahrzeugs, $l$ der Achsabstand, $l_\text{H}$ der Abstand von der Hinterachse zu einem Referenzpunkt und $y$ der Abstand zur Wand. Mit beiden Systemen wurde in Simulink eine PD-Reglerauslegung durchgef\"uhrt. Es wurden diskrete Systeme betrachtet, die Geschwindigkeit war $\SI[per-mode=fraction]{0.5}{\meter\per\second}$.
+\begin{figure}[h] %TODO replace image
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/simulink}
+	\caption{PD-Regler Auslegung in Simulink.}
+	\label{fig:simulinkPD}
+\end{figure}
+Mit den gefundenen Parametern konnten keine guten Ergebnisse erzielt werden, der Fahrzeug hat den gew\"unschten Abstand zur Wand nicht eingehalten und ist stark geschwungen. Das ist auf die Ann\"aherung \"uber das Ackermann-Modell und den betrachteten Abstand zu Wand zur\"uckzuf\"uhren. Angenommen wird der Abstand senkrecht zur Wand, der in Wirklichkeit vom Fahrzeug gemessene ist bei schr\"agem Stand jedoch gr\"o\ss{}er. Die Parameter wurden manuell modifiziert und ein zufriedenstellendes Ergebnis erzielt (vergleiche Tabelle \ref{tab:PD}).
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{rcc}
+		 & $K_\text{p}$ & $K_\text{d}$ \\ 
+		Simulink & TODO & TODO \\ 
+		Experimentell & 0.48 & 1.5
+	\end{tabular}
+	\caption{Werte f\"ur PD Regler aus Simulation und experimenteller Bestimmung.}
+	\label{tab:PD}
+\end{table}
+
+Da die Ergebnisse nicht zufriedenstellend und die L\"osung f\"ur den Rundkurs mit Hindernis nicht praktikabel ist, wurde dieser Ansatz verworfen und am Navigation Stack gearbeitet.

@@ -1,5 +1,8 @@
 \section{Trajektorienplanung}
 \label{sec:trajektorienplanung}
+Das Auto hat vorne sowie hinten jeweils zwei R\"ader, die durch einen Elektromotor ansteuerbar sind. Die Lenkung der Vorderachse ist durch einen Servomotor realisiert. Das Fahrzeug ist vorne und an den Seiten mit Ultraschallsensoren zur Abstandmessung ausgestattet und besitzt eine nach vorne ausgerichtete Kinect2 Kamera, die sowohl Farb- als auch Tiefenbild liefert. F\"ur die Bestimmung der Orientierung des Fahrzeugs sind verschiedene Sensoren verbaut. \\
+Um einen Rundkurs mit oder ohne Hindernissen zu bew\"altigen, muss man die gegebenen Werkzeuge nutzen und entsprechend kombinieren um das Ziel zu erreichen. Die beiden Ans\"atzen \"uber einen PD-Abstandregler (vergleiche Abschnitt \ref{subsec:02PDregler}) und \"uber eine Trajektorienplanung (vergleiche Abschnitt \ref{subsec:02implementierung}) werden im Folgenden vorgestellt.
+
 \input{subsec/02_modellbildung}
 \input{subsec/02_PDregler}
 \input{subsec/02_lokalisierung}
