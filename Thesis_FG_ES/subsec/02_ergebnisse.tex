@@ -1,2 +1,3 @@
 \subsection{Ergebnisse und Probleme}
 \label{subsec:02ergebnisse}
+Wie im Kapitel \ref{subsec:02odom} bereits erw\"ahnt, haben wir den Extended Kalmanfilter nicht fertig eingestellt. Der implementierte EKF benutzt die IMU-Daten und die Geschwindigkeit, welche durch den Hall-Sensor berechnet wird. Obwohl wir die Y-Geschwindigkeit des Fahrzeugs nicht als Eingabegr\"o{\ss}e f\"ur unseren EKF verwenden und nur die Steuerung der X-Geschwindigkeit und Yaw-Rate zugelassen sind, bewegt sich unser Auto in den gefilterten Odometriedaten des EKF seitw\"arts. Das Einstellen der maximalen Be- und Entschleunigungswerte des Fahrzeugs hat zwar zur Verbesserung der Absch\"atzung beigetragen, das Problem der seitlichen Bewegung jedoch nicht behoben.

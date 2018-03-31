@@ -1,2 +1,13 @@
 \subsubsection{Odometrie}
 \label{subsec:02odom}
+Auf dem Fahrzeug befinden sich ein Drei-Achs-Geschwindigkeitssensor und ein Drei-Achs-Gyroskop, welche etwa alle 5ms neue Werte zur Verf\"ugung stellen. Diese werden im vorhandenen Odometriepaket genutzt um eine Position und die Ausrichtung des Fahrzeugs anzugeben. Durch das Rauschen der Sensoren unterscheidet sich die tats\"achliche Position  nach einiger Zeit von der angegebenen Fahrzeugposition. Die IMU wird im Odometriepaket zwar zu Beginn kalibriert, dies bedeutet jedoch nur, dass ein festgelegter, im Stand gemittelter Rauschwert ber\"ucksichtigt und von den IMU Daten subtrahiert wird.\\
+Die Verwendung eines Extended Kalmanfilters (EKF) erlaubt es uns, verschiedene Sensoren als Eingangsgr\"o{\ss}en f\"ur die Sch\"atzung der Fahrzeugposition und der Ausrichtung zu verwenden. Der EKF berechnet aus dem aktuellen Zustand anhand eines nicht-linearen Zustands\"ubergangsmodells eine Absch\"atzung f\"ur den n\"achsten Fahrzeugzustand. Durch die Verwendung mehrerer Sensoren kann die Genauigkeit und Zuverl\"assigkeit der Sensoren mithilfe einer Gewichtung der Eingangsgr\"o{\ss}en des EKF ber\"ucksichtigt werden.  Die Zustandssch\"atzung wird mit der n\"achsten Messung verglichen und die Gewichtung der Sensoren dynamisch angepasst.\\
+Wir haben uns f\"ur das Robot\_localization Paket entschieden. Dies enth\"alt einen EKF, der es erm\"oglicht die Sensoren modular einzubinden und Sensorspezifisch zu entscheiden, welche Daten weiterverarbeitet werden sollen.
+Das Paket kann vier verschiedene Topic-Typen verarbeiten:\begin{description}
+	\item[nav\_msgs/Odometry] enh\"alt Positions- und Ausrichtungsdaten
+	\item[geometry\_msgs/PoseWithCovarianceStamped] enth\"alt Positionsdaten
+	\item[geometry\_msgs/TwistWithCovarianceStamped] enth\"alt Ausrichtungsdaten
+	\item[sensor\_msgs/IMU] enth\"alt die Rohdaten aus der Inertialen Messeinheit (IMU)
+\end{description}
+Um die Sch\"atzung zu vereinfachen, nehmen wir an, dass sich unser Fahrzeug nur im zweidimensionalen Raum befindet und sich nur in X-Richtung fortbewegen kann. Z-Koordinate, Roll und Pitch sind daher konstant Null. Die Beschleunigung in Y-Richtung wird als Eingangsr\"o{\ss}e ignoriert. \\
+Das Robot\_localization Paket erm\"oglicht es uns, die Kamera in Verbindung mit \hyphenation{AMCL} AMCL, den Hall-Sensor und die IMU als Eingangsgr\"o{\ss}en f\"ur den EKF zu verwenden. Aus Zeitgr\"unden haben wir den EKF nicht fertig eingestellt, stattdessen verwenden wir f\"ur die Lokalisierung die Odometriedaten in Verbindung mit AMCL, wie im folgenden Abschnitt \ref{subsec:02amcl} beschrieben wird. Dies liefert uns eine ausreichend genaue Fahrzeugposition und Ausrichtung.
