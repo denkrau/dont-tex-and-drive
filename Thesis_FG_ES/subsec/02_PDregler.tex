@@ -4,13 +4,13 @@
 Ein einfacher Ansatz f\"ur den Rundkurs ohne Hindernisse ist die Abstandregelung mit Hilfe der Ultraschallsensoren und einem PID Regler. Die zu regelnde Gr\"o\ss{}e ist der Abstand zur Wand, als Stellgr\"o\ss{}e dient der Lenkwinkel. Dazu kann entweder die Stellgr\"o\ss{}e f\"ur den Lenkwinkel geregelt werden oder der Lenkwinkel selbst und dann auf die Stellgr\"o\ss{}e mit dem Lenkwinkelmodell umgerechnet werden. Die Reglerauslegung ist sowohl per Simulation in Simulink als auch experimentell durchgef\"uhrt worden. \\
 Die Simulation beruht auf dem Ackermann-Modell, einem Einspurmodell f\"ur Fahrzeuge. Es lautet
 
-\begin{align} 
+\begin{align*} 
 	\dot{\varphi}_\text{K} &= \frac{v}{l}\cdot\tan\varphi_\text{L}\\
 	\dot{y} &= v \cdot \sin \varphi_\text{K}+v\cdot\frac{l_\text{H}}{l}\cdot\cos\varphi_\text{K}\cdot\tan\varphi_\text{L}.
 	\intertext{Durch Linearisierung erh\"alt man}
 	\dot{\varphi}_\text{K} &= \frac{v}{l}\cdot\varphi_\text{L}\\
 	\dot{y} &= v\cdot\varphi_\text{K}+v\cdot\frac{l_\text{H}}{l}\cdot\varphi_\text{L}.
-\end{align}
+\end{align*}
 Dabei ist $\varphi_\text{K}$ der Kurswinkel, $\varphi_\text{L}$ der Lenkwinkel, $v$ die Geschwindigkeit des Fahrzeugs, $l$ der Achsabstand, $l_\text{H}$ der Abstand von der Hinterachse zu einem Referenzpunkt und $y$ der Abstand zur Wand. Mit beiden Systemen wurde in Simulink eine PD-Reglerauslegung durchgef\"uhrt. Es wurden diskrete Systeme betrachtet (vergleiche Abbildung \ref{fig:regelkreis}), die Geschwindigkeit war $\SI[per-mode=fraction]{0.5}{\meter\per\second}$. Der simulierte Verlauf der Sprungantwort ist in Abbildung \ref{fig:SprungantwortSimulink} dargestellt, der Stellgr\"o\ss{}enverlauf in Abbildung \ref{fig:StellgroesseSimulink}.
 
 \begin{figure}[h]
