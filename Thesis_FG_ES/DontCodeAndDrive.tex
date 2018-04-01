@@ -19,12 +19,19 @@ twoside %TODO
 
 %listings
 \usepackage{listings}
+\lstset{breaklines=true, basicstyle=\small}
 
 % clickable references
 \usepackage{hyperref}
 
 \usepackage{amsmath}
 \usepackage{siunitx}
+
+\usepackage{pgfplots} 
+\pgfplotsset{compat=newest}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{graphicx}
 
 \newcommand{\getmydate}{%
 \iflanguage{ngerman}{%
@@ -101,9 +108,9 @@ twoside %TODO
   
 	\bibliographystyle{alphadin}
 	\bibliography{literature}
-	
-	%\begin{appendix}
-	%\section{Erster Anhang}
-	%\end{appendix}
+	\cleardoublepage
+	\begin{appendix}
+		\input{chapters/appendix.tex}
+	\end{appendix}
 
 \end{document}

@@ -1,0 +1,18 @@
+obstacle_range: 5
+raytrace_range: 5.5
+footprint: [[-0.18, 0.105], [0.18, 0.105], [0.18,-0.105], [-0.18, -0.105]]
+map_type: costmap
+
+plugins:
+  - {name: static_map, type: "costmap_2d::StaticLayer"}
+  - {name: obstacles, type: "costmap_2d::VoxelLayer"}
+  - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+obstacles:
+   combination_method: 1
+   observation_sources: laser_scan_sensor
+   laser_scan_sensor: {sensor_frame: base_laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+
+inflation_layer:
+   inflation_radius: 1.0
+   cost_scaling_factor: 0.7 # 5 for obstacle parcour
