@@ -1,0 +1,25 @@
+\subsubsection{Controller}
+\label{subsec:03controller}
+Die jetzt bekannten Koordinaten $\vec{p} = [p_x, p_y, p_z]^T$ der Person sind aus mehrfachen Gründen als finales Ziel ungeeignet. Zum einen ist eine Erkennung der Person schwierig, wenn das Auto so nah an diese heranfährt. Zum anderen fährt das Auto bei stationärer Ausregelung stets die Person an. Daher ergibt sich das finale Ziel bzw. die Führungsgröße aus einer radialen Verschiebung der Personenkoordinaten in Richtung der Kamera mittels des Strahlensatzes zu 
+\begin{equation}
+	\vec{w} =
+	\begin{pmatrix}
+		w_x \\w_y \\w_z
+	\end{pmatrix}=
+	\begin{pmatrix}
+		p_x \cdot (1 - d_p / d_{euc})\\ p_y \\ p_z \cdot (1 - d_p / d_{euc})
+	\end{pmatrix}
+\end{equation}
+mit $d_{euc} = \sqrt{p_x^2 + p_z^2}$ und $d_p$ als beliebiger Abstand zur Person. Wir legen $d_p = 2.0$ fest, allerdings bietet es sich an, diesen variabel zu gestalten, um zum Beispiel Fahrten um Ecken in schmalen Gängen zu verbessern. Bei diesem großen Abstand kann es durchaus vorkommen, dass solche Szenarien nicht bewältigt werden können.
+
+Eine Anfahrt dieser Zielkoordinate $\vec{w}$ ist auf zwei Varianten möglich. Die einfachste und ressourcenschonendste ist die Regelung mithilfe eines konventionellen Reglers. Mit der Wahl eines PD-Reglers entspricht diese Variante der von uns genutzten. Dabei muss zum einen der Lenkwinkel mit
+\begin{equation}
+	\delta = K_{P, \delta} \cdot w_x(t) + K_{D, \delta} \frac{w_x(t) - w_x(t-1)}{dt}
+\end{equation}
+berechnet werden, um die $x$-Koordinate anzufahren. Zum anderen muss mit
+\begin{equation}
+	v = K_{P, v} \cdot w_z(t) + K_{D, v} \frac{w_z(t) - w_z(t-1)}{dt}
+\end{equation}
+die Geschwindigkeit berechnet werden, um mit einem flüssigen Fahrverhalten die $z$-Koordinate zu erreichen. Dabei entsprechen $K_{P, \delta}$ und $K_{D, \delta}$ bzw. $K_{P, v}$ und $K_{D, v}$ den jeweiligen Verstärkungsfaktoren, $t$ dem Abtastzeitpunkt und $dt$ der Differenz beider Abtastzeitpunkte. Sofern stationäre Genauigkeit gewünscht ist, müssen die Regelgesetze um einen I-Anteil erweitert werden und eine Implementierung eines Anti-Windups sollte erfolgen.
+
+Als zweite Variante ist die Kombination mit einem lokalen Mapper und Planer möglich. Hier kann der Navigation Stack aus Kapitel \ref{subsec:02lokalisierung} bei gleichbleibender Konfiguration verwendet werden. Das Ziel $\vec{w}$ wird stetig als ROS-Message PoseStamped gesendet, welche direkt als Zielvorgabe des Planers verwendet werden kann. Somit liegt ein dynamisches Ziel vor, das mit einer Erkennung von möglichen Hindernissen und einer Umgehung dieser angefahren wird. Hierbei ist allerdings zu beachten, dass diese Variante sehr rechenintensiv ist und auf der aktuellen Hardwarekonfiguration des Autos nicht lauffähig ist.
