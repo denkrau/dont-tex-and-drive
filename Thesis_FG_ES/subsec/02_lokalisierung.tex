@@ -1,5 +1,7 @@
 \subsection{Lokalisierung}
 \label{subsec:02lokalisierung}
 
+Die Trajektorienplanung des Roboters erfolgt anhand seiner Umgebungskarte, die mit den Sensordaten regelm"a"sig aktualisiert wird. Damit eine gute Trajektorie berechnet werden kann, muss das Auto in der Lage sein, sich zuverl"assig in der Karte sich zu lokalisieren. Dies erfordert unter anderem eine verl"assliche Odometrie, die im Abschnitt \ref{subsec:02odom} vorgestellt wird. Um die Position des Autos in der Karte genauer zu sch"atzen, wurde au"serdem das AMCL-Paket verwendet, wie im Abschnitt \ref{subsec:02amcl} beschrieben wird.
+
 \input{subsubsec/02_odometrie.tex}
 \input{subsubsec/02_amcl.tex}
