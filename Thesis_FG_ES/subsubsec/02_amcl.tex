@@ -1,7 +1,7 @@
 \subsubsection{AMCL}
 \label{subsec:02amcl}
 
-Zur Lokalisierung des Autos wird das von ROS bereitgestellte AMCL-Paket verwendet. Dieses Paket implementiert den probabilistischen \emph{Adaptive Monte Carlo Localization} - Algorithmus und erm"oglicht dadurch die 2D-Lokalisierung von Robotern in einer vorgegebenen Karte. Die Daten aus dem Laserscan werden auf die Karte projiziert, woraus die wahrscheinlichsten Position und Ausrichtung des Fahrzeugs bestimmt werden.\\
+Zur Lokalisierung des Autos wird das von ROS bereitgestellte AMCL-Paket verwendet. Dieses Paket implementiert den probabilistischen \emph{Adaptive Monte Carlo Localization} - Algorithmus und erm"oglicht dadurch die 2D-Lokalisierung von Robotern in einer vorgegebenen Karte. Die Daten aus dem Laserscan werden auf die Karte projiziert, woraus die wahrscheinlichste Position und Ausrichtung des Fahrzeugs bestimmt wird.\\
 Zu diesem Zweck ben"otigt es mehrere Informationen, n"amlich : 
 \begin{itemize}
 \item einen Laserscan, der aus den Kameradaten erzeugt wird 
@@ -10,6 +10,6 @@ Zu diesem Zweck ben"otigt es mehrere Informationen, n"amlich :
 \item die Karte, in der der Roboter sich orten soll
 \end{itemize}
 
-Diese Topics werden gleicherma"sen vom Navigation Stack ben"otigt und werden deswegen im entsprechenden Kapitel (siehe \ref{subsec:02implementierung}) n"aher beschrieben.\\
+Diese Topics werden gleicherma"sen vom Navigation Stack ben"otigt und werden deswegen im entsprechenden Kapitel \ref{subsec:02implementierung} n"aher beschrieben.\\
 Allerdings ist darauf hinzuweisen, dass AMCL eine explizite Transformation vom Laserscan-Frame (hier, \texttt{base\_laser}) zum Odometrie-Frame (hier, \texttt{odom}) erfordert.\\
-Das AMCL-Paket stellt ebenso eine ganze Menge von einstellbaren Optimierungsparametern bereit. Es ist zum Beispiel m"oglich das Odometriemodell (\texttt{omni} bzw. \texttt{diff} f"ur Roboter mit omnidirektionalem bzw. Differentialantrieb) auszuw"ahlen, sowie die entsprechenden Parametern einzustellen. Aus zeitlichen Gr"unden wurde jedoch eine im Navigation Stack bereits vorhandene Launchdatei f"ur differentialgetriebene Fahrzeuge (\texttt{amcl\_diff.launch}) verwendet.
+Das AMCL-Paket stellt ebenso eine ganze Menge von einstellbaren Optimierungsparametern bereit. Es ist zum Beispiel m"oglich das Odometriemodell (\texttt{omni} bzw. \texttt{diff} f"ur Roboter mit omnidirektionalem bzw. Differentialantrieb) auszuw"ahlen, sowie die entsprechenden Parameter einzustellen. Aus zeitlichen Gr"unden wurde jedoch eine im Navigation Stack bereits vorhandene Launchdatei f"ur differentialgetriebene Fahrzeuge (\texttt{amcl\_diff.launch}) verwendet.
