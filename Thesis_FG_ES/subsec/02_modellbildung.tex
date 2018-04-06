@@ -1,9 +1,9 @@
 \subsection{Modellbildung}
 \label{subsec:02modellbildung}
-Um eine Beziehung zwischen physikalischer Gr\"o\ss{}e f\"ur Geschwindigkeit und Lenkwinkel und der entsprechenden Stellgr\"o\ss{}e zu herzustellen, wird jeweils ein Modell ben\"otigt.
+Um eine Beziehung zwischen physikalischer Gr\"o\ss{}e f\"ur Geschwindigkeit und Lenkwinkel und der entsprechenden Stellgr\"o\ss{}e herzustellen, wird jeweils ein Modell ben\"otigt.
 \paragraph{Geschwindigkeitsmodell} 
-Die Daten aus Abbildung \ref{fig:Geschwindigkeitsmodell} wurden bei einer Messfahrt mit Hilfe eines rosbag aufgezeichnet und im Anschluss mit dem Tool plotjuggler ausgewertet. Dazu wurde das Fahrzeug mit Geschwindigkeitsstellgr\"o\ss{}en im Intervall von $-500$ bis $1000$ angesteuert und die jeweilige Geschwindigkeit aus der Odometrie ausgelesen. Auff\"allig ist der Sprung am Achsenursprung, der dadurch entsteht, dass das Fahrzeug eine bestimmte Stellgr\"o\ss{}e ben\"otig, um seine Tr\"agheit zu \"uberwinden.
-Die gemessenen Daten lassen sich durch zwei Gerade approximieren:
+Die Daten aus Abbildung \ref{fig:Geschwindigkeitsmodell} wurden bei einer Messfahrt mit Hilfe eines rosbag aufgezeichnet und im Anschluss mit dem Tool \texttt{plotjuggler} ausgewertet. Dazu wurde das Fahrzeug mit Geschwindigkeitsstellgr\"o\ss{}en im Intervall von $-500$ bis $1000$ angesteuert und die jeweilige Geschwindigkeit aus der Odometrie ausgelesen. Auff\"allig ist der Sprung am Achsenursprung, der dadurch entsteht, dass das Fahrzeug eine bestimmte Stellgr\"o\ss{}e ben\"otig, um seine Tr\"agheit zu \"uberwinden.
+Die gemessenen Daten lassen sich durch zwei Geraden approximieren:
 \begin{align*}
   f(x) =
   \begin{cases}
@@ -47,17 +47,17 @@ Die gemessenen Daten lassen sich durch zwei Gerade approximieren:
 
 \paragraph{Lenkwinkelmodell}
 Die Bestimmung des Lenkwinkelmodells (Abbildung \ref{fig:Lenkwinkelmodell}) erfolgte nach dem Schema:
-\begin{itemize}
+\begin{enumerate}
 	\item Auto anheben und Stellgr\"o\ss{}e f\"ur den Lenkwinkel auf 0 setzen
 	\item Mit Geschwindigkeit 300 kurz geradeaus fahren und dann Lenkwinkel einstellen
 	\item Geschwindigkeit auf 0 setzen und den Lenkwinkel mit einem Geodreieck messen
-\end{itemize}
+\end{enumerate}
 Dazu war das Paket rqt\_reconfigure sehr hilfreich. Die gemessenen Daten wurden im Anschluss durch das Polynom sechsten Grades
 \begin{align*}
 196814\cdot x^6 - 50518\cdot x^5 - 47550\cdot x^4 + 5979.7\cdot x^3 + 2459.5\cdot x^2 - 2442.1\cdot x + 143.78
 \end{align*} 
 approximiert.
-Auff\"alig ist die Verschiebung auf der y-Achse, die durch Offset in der Lenkung entsteht. Es sei angemerkt, dass die Messungen mit Fehlern behaftet waren und somit eine ungenaues Lenkwinkelmodell entstanden ist. Genauere Ergebnisse k\"onnte man mit Verwendung der Odometrie bei einer Fahrt im Kreis erzielen.
+Auff\"allig ist die Verschiebung auf der x-Achse, die durch einen Offset in der Lenkung entsteht. Es sei angemerkt, dass die Messungen mit Fehlern behaftet waren und somit eine ungenaues Lenkwinkelmodell entstanden ist. Genauere Ergebnisse k\"onnte durch Verwendung der Odometrie bei einer Fahrt im Kreis erzielt werden.
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
