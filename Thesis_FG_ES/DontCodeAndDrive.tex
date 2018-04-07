@@ -7,6 +7,8 @@ accentcolor=tud1c,
 twoside %TODO
 ]{tudthesis}
 
+\renewcommand{\vec}[1]{\bm{#1}}
+
 \usepackage[ngerman]{babel}
 %\usepackage[english]{babel}
 
@@ -57,7 +59,6 @@ twoside %TODO
 \counterwithin{figure}{section} 
 \counterwithin{table}{section} 
 
- 
 \setinstitutionlogo[height]{logo/ESlogo.png}
 
 \begin{document}
@@ -107,8 +108,9 @@ twoside %TODO
 	\input{chapters/fazit_ausblick}
 	\cleardoublepage
   
-	\bibliographystyle{alphadin}
+	\bibliographystyle{abbrvdin}
 	\bibliography{literature}
+	\nocite{*}
 	\cleardoublepage
 	\begin{appendix}
 		\input{chapters/appendix.tex}
