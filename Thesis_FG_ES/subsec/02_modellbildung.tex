@@ -13,10 +13,10 @@ Die gemessenen Daten lassen sich durch zwei Geraden approximieren:
   \end{cases}
 \end{align*}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
-	\begin{axis}[xlabel = Geschwindigkeit in \si{\meter\per\second},ylabel=Geschwindigkeit Stellgr\"o\ss{}e,xmin=-1,xmax=2.2,ymin=-600, ymax=1100, restrict y to domain=-1000:1000,axis x line=bottom, axis y line	=left,grid,legend pos=south east]
+	\begin{axis}[xlabel = Geschwindigkeit in \si{\meter\per\second},ylabel=Geschwindigkeit Stellgr\"o\ss{}e,xmin=-1,xmax=2.2,ymin=-600, ymax=1100, restrict y to domain=-1000:1000,axis x line=bottom, axis y line	=left,grid,legend pos=south east ,width=10cm , height=6.5cm]
 	\addplot coordinates  {
 		(-0.825872,	-500)
 		(-0.619982,	-400)
@@ -48,11 +48,11 @@ Die gemessenen Daten lassen sich durch zwei Geraden approximieren:
 \paragraph{Lenkwinkelmodell}
 Die Bestimmung des Lenkwinkelmodells (Abbildung \ref{fig:Lenkwinkelmodell}) erfolgte nach dem Schema:
 \begin{enumerate}
-	\item Auto anheben und Stellgr\"o\ss{}e f\"ur den Lenkwinkel auf 0 setzen
+	\item Fahrzeug anheben und Stellgr\"o\ss{}e f\"ur den Lenkwinkel auf 0 setzen
 	\item Mit Geschwindigkeit 300 kurz geradeaus fahren und dann Lenkwinkel einstellen
 	\item Geschwindigkeit auf 0 setzen und den Lenkwinkel mit einem Geodreieck messen
 \end{enumerate}
-Dazu war das Paket rqt\_reconfigure sehr hilfreich. Die gemessenen Daten wurden im Anschluss durch das Polynom sechsten Grades
+Dazu war das Paket \texttt{rqt\_reconfigure} hilfreich. Die gemessenen Daten wurden im Anschluss durch das Polynom sechsten Grades
 \begin{align*}
 196814\cdot x^6 - 50518\cdot x^5 - 47550\cdot x^4 + 5979.7\cdot x^3 + 2459.5\cdot x^2 - 2442.1\cdot x + 143.78
 \end{align*} 
@@ -61,7 +61,7 @@ Auff\"allig ist die Verschiebung auf der x-Achse, die durch einen Offset in der 
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
-	\begin{axis}[xlabel = Lenkwinkel in \si{\radian},ylabel=Lenkwinkel Stellgr\"o\ss{}e,xmin=-0.40,xmax=0.45,ymin=-1000, ymax=1100, restrict y to domain=-800:800,axis x line=bottom, axis y line	=left,grid]
+	\begin{axis}[xlabel = Lenkwinkel in \si{\radian},ylabel=Lenkwinkel Stellgr\"o\ss{}e,xmin=-0.40,xmax=0.45,ymin=-1000, ymax=1100, restrict y to domain=-800:800,axis x line=bottom, axis y line	=left,grid,,width=10cm , height=6.5cm]
 	\addplot coordinates  {
 		(0.3548836146,-800)
 		(0.3141592654,-600)

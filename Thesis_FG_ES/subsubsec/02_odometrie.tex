@@ -10,5 +10,5 @@ Das Paket kann vier verschiedene Topic-Typen verarbeiten:
 	\item \texttt{geometry\_msgs/TwistWithCovarianceStamped} enth\"alt Ausrichtungsdaten
 	\item \texttt{sensor\_msgs/IMU} enth\"alt die Rohdaten aus der Inertialen Messeinheit (IMU)
 \end{itemize}
-Um die Sch\"atzung zu vereinfachen wird angenommen, dass sich das Fahrzeug nur im zweidimensionalen Raum befindet und nur in X-Richtung fortbewegen kann. Z-Koordinate, Roll- und Pitch Winkel sind daher konstant Null. Die Beschleunigung in Y-Richtung wird als Eingangsr\"o{\ss}e vernachl\"assigt. \\
+Um die Sch\"atzung zu vereinfachen wird angenommen, dass sich das Fahrzeug nur im zweidimensionalen Raum befindet und nur in $x$-Richtung fortbewegen kann. $z$-Koordinate, Roll- und Pitch Winkel sind daher konstant Null. Die Beschleunigung in $y$-Richtung wird als Eingangsr\"o{\ss}e vernachl\"assigt. \\
 Das \texttt{robot\_localization} Paket erm\"oglicht es, die Kamera in Verbindung mit \hyphenation{AMCL} AMCL, dem Hall-Sensor und der IMU als Eingangsgr\"o{\ss}en f\"ur das EKF zu verwenden. Aus Zeitgr\"unden haben wir das EKF nicht fertig eingestellt, stattdessen verwenden wir f\"ur die Lokalisierung die Odometriedaten in Verbindung mit AMCL, wie im Abschnitt \ref{subsec:02amcl} beschrieben wird. Dies liefert uns eine ausreichend genaue Fahrzeugposition und Ausrichtung.

@@ -6,7 +6,7 @@ F\"ur die Navigation wird eine Karte genutzt. Es wird unterschieden zwischen glo
 \begin{itemize}
 	\item Static Map Layer: diese Schicht beinhaltet Kartendaten aus bereits gemappten Umgebungen, falls vorhanden. Sie sind Teil der globalen Costmap und bleiben w\"ahrend der gesamten Laufzeit bestehen.
 	\item Obstacle Map Layer: diese Schicht enh\"alt die Daten aus dem Laserscan, der mit dem Package \texttt{depthimage\_to\_laserscan} aus dem mit \texttt{pses\_kinect\_utilities} Median-gefilterten Tiefenbilder der Kinect2 Kamera erstellt wird. Hier werden also lokale Hindernisse gespeichert und bei Bedarf wieder entfernt. Diese Schicht ist Teil der lokalen Costmap.
-	\item Inflation Layer: diese Schicht definiert einen Bereich um jedes erkannte Hindernis und \"uberlagert diesen mit einer Kostenfunktion (nah am Objekt hohe Bestrafung, weiter entfernt weniger Bestrafung). Die wichtigen Parameter sind inflation\_radius (\SI{1}{\meter}) und cost\_scaling\_factor (0.7 / 5). Diese Schicht ist ebenfalls Teil der lokalen Costmap. 
+	\item Inflation Layer: diese Schicht definiert einen Bereich um jedes erkannte Hindernis und \"uberlagert diesen mit einer Kostenfunktion (nah am Objekt hohe Bestrafung, weiter entfernt weniger Bestrafung). Die wichtigen Parameter sind \texttt{inflation\_radius} (\SI{1}{\meter}) und \texttt{cost\_scaling\_factor} (0.7 / 5). Diese Schicht ist ebenfalls Teil der lokalen Costmap. 
 \end{itemize}
 
 \paragraph{Globaler Planer} 
@@ -36,7 +36,7 @@ Ausgehen von dem globalen Pfad wird ein lokaler Pfad geplant, der auf Hinderniss
 \end{table}
 
 \paragraph{TF}
-Jedes ver\"offentliche Topic wird mit einem Frame markiert. Um die Beziehung zwischen den dazugeh\"origen Koordinatensystemen herzustellen, kann das Package \texttt{TF}\footnote{http://wiki.ros.org/tf\#static\_transform\_publisher} genutzt werden. Darin wird jeweils zwischen zwei Systemen eine Beziehung definiert und somit ein TF-Baum erstellt. Eine Transformation definiert sich durch
+Jedes ver\"offentliche Topic wird mit einem Frame markiert. Um die Beziehung zwischen den dazugeh\"origen Koordinatensystemen herzustellen, kann das Package TF\footnote{http://wiki.ros.org/tf\#static\_transform\_publisher} genutzt werden. Darin wird jeweils zwischen zwei Systemen eine Beziehung definiert und somit ein TF-Baum erstellt. Eine Transformation definiert sich durch
 \lstset{breaklines=true, basicstyle=\small}
 \begin{lstlisting}
  <node pkg="tf" type="static_transform_publisher" name="Select_a_name" args="x y z qx qy qz qw PARENT CHILD 20" />.
@@ -60,7 +60,7 @@ Der Baum setzt sich, wie in Tabelle \ref{tab:TF} gezeigt, zusammen.
 
 \paragraph{Debugging}
 Beim Einrichten des Navigation Stack treten hin und wieder Probleme und Fehler auf. Die Korrektheit des TF-Baum l\"asst sich mit \texttt{rosrun rqt\_tf\_tree rqt\_tf\_tree} \"uberpr\"ufen. Die Informationen in einem Topic lassen sich mit \texttt{rostopic echo TOPIC} auslesen und Publisher sowie Subscriber mit \texttt{rostopic info TOPIC} ausgeben. Die Verbindungen zwischen laufenden Nodes wird mit \texttt{rosrun rqt\_graph rqt\_graph} dargestellt.\\
-Sobald die grundlegende Struktur funktioniert, hilft das grafische Programm \texttt{RViz}\footnote{http://wiki.ros.org/rviz} weiter. Ob die Transformationen zwischen den Koordinatensystemen korrekt sind l\"asst sich damit \"uberpr\"ufen. Au\ss{}erdem l\"asst sich damit die globale Karte, Costmap und der Laserscan darstellen und auf Korrektheit pr\"ufen. Zus\"atzlich ist die Position und der Footprint (digitale Repr\"asentation des Fahrzeugs) visualisierbar, welcher sich beim Fahren auch verschieben. Dabei sollte beachtet werden, dass sich die dargestellte Position des Fahrzeugs nur verschiebt, wenn der Motor angesteuert wird, beim Drehen des Hallsensors ohne Ansteuerung wird vom \texttt{pses\_odometrie} Package keine Positions\"anderung gepublisht. Sobald die Karte und Position des Fahrzeugs korrekt wiedergegeben werden, ist es sinnvoll in RViz \"uber den Button \texttt{2D Nav Goal} ein Ziel zu setzen und die geplante Trajektorie ausgeben zu lassen.\\
+Sobald die grundlegende Struktur funktioniert, hilft das grafische Programm RViz\footnote{http://wiki.ros.org/rviz} weiter. Ob die Transformationen zwischen den Koordinatensystemen korrekt sind l\"asst sich damit \"uberpr\"ufen. Au\ss{}erdem l\"asst sich damit die globale Karte, Costmap und der Laserscan darstellen und auf Korrektheit pr\"ufen. Zus\"atzlich ist die Position und der Footprint (digitale Repr\"asentation des Fahrzeugs) visualisierbar, welcher sich beim Fahren auch verschieben. Dabei sollte beachtet werden, dass sich die dargestellte Position des Fahrzeugs nur verschiebt, wenn der Motor angesteuert wird, beim Drehen des Hallsensors ohne Ansteuerung wird vom \texttt{pses\_odometrie} Package keine Positions\"anderung gepublisht. Sobald die Karte und Position des Fahrzeugs korrekt wiedergegeben werden, ist es sinnvoll in RViz \"uber den Button \texttt{2D Nav Goal} ein Ziel zu setzen und die geplante Trajektorie ausgeben zu lassen.\\
 Es sei angemerkt, dass ein positiver Wert f\"ur die Stellgr\"o\ss{}e des Lenkwinkels einen Einschlag nach rechts bedeutet, der TEB local planner allerdings mit positiven Werten einen Lenkeinschlag nach links meint.
 
 \paragraph{Hilfreiche Tools}
@@ -88,19 +88,6 @@ Die beiden Aufgaben Rundkurs ohne sowie mit Hindernissen sind vom Grundprinzip s
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth,trim=2.4cm 0cm 0cm 1cm,clip]{pics/rviz.png}
-	\caption{Ausschnitt aus rviz mit der Costmap, dem Footprint des Fahrzeugs und der Zielf\"uhrung sowie das Terminal, in dem der Fahrknoten gestartet ist.}
+	\caption{Ausschnitt aus RViz mit der Costmap, dem Footprint des Fahrzeugs und der Zielf\"uhrung sowie das Terminal, in dem der Fahrknoten gestartet ist.}
 	\label{fig:rviz}
 \end{figure}
-
-\paragraph{Probleme}
-Obwohl der Navigation Stack und haupts\"achlich der TEB local planner insgesamt gut eingestellt sind, gibt es einige Probleme, die es in Zukunft zu l\"osen gilt.
-\begin{itemize}
-	\item \textbf{Artefakte Laserscan:} Das Package \texttt{depthimage\_to\_laserscan} liest eine Zeile aus dem Tiefenbild, welches mit Rauschen behaftet ist. Dadurch entstehen Artefakt-Punkte auf der Costmap, die der Planer als Hindernis erkennt, die allerdings nicht real sind. Obwohl das Tiefenbild bereits durch einen Medianfilter (Filtergr\"o\ss{}e 5) bearbeitet wird, tritt dieser Effekt immer noch auf. \\
-	Ein L\"osungsansatz w\"are die Gr\"o\ss{}e des Filters zu erh\"ohen, allerdings ist der verwendete Filter aus dem Package \texttt{pses\_kinect\_utilities} mit Gr\"o\ss{}e 5 begrenzt. Ein weiterer L\"osungsansatz w\"are den Laserscan aus mehreren Zeilen des Tiefenbildes auszulesen und von jeder Spalte den maximalen Wert herauszuschreiben. 
-	\item \textbf{Recovery:} Da die lokale Costmap nicht nur die aktuellen Daten aus dem Laserscan beinhaltet, sondern auch mit den vorangegangenen Daten eine Karte zusammenbaut, k\"onnen Artefakte mit in die Karte eingetragen werden. Passiert das h\"aufiger an einer Stelle, kann es den Weg f\"ur den Trajektorienplaner versperren.\\
-	Um diese falsch detektierten Punkte wieder loszuwerden, gibt es den Parameter \texttt{recovery\_behaviors}, der verschiedene Szenarien zum Leeren des Costmap beinhaltet. Es gibt einige Parameter\footnote{http://wiki.ros.org/move\_base\#Parameters}, die den Zeitpunkt des Ausf\"uhrens des Recovery Programms beeinflussen, diese sollten eingestellt werden. Es sei angemerkt, dass der Parameter \texttt{clearing\_rotation\_allowed} auf false gesetzt sein sollte, da das Fahrzeug eine solche Bewegung nicht vollziehen kann.
-	\item \textbf{R\"uckw\"arts fahren:} Sobald das Fahrzeug nah an einem Hindernis f\"ahrt, kommt es in einen Bereich in dem der Wert der Straffunktion hoch ist. Das bedeutet, dass das Fahrzeug sich in diesem Bereich nur langsam bewegen darf. Es hat sich gezeigt, dass in diesem Fall der TEB local planner nur noch vereinzelt Geschwindigkeitswerte ausgegeben hat und im Hindernis stecken geblieben ist.\\
-	Der Navigation Stack sollte entsprechend eingestellt werden, dass dieser in solchen Situationen r\"uckw\"arts f\"ahrt und sich somit Platz verschafft, um am Hindernis vorbei zu fahren.
-	\item \textbf{AMCL Fehldetektion:} AMCL dient dazu sich besser in einer Karte zu orientieren, indem es den Laserscan auf die Karte projiziert und damit die aktuelle Position bestimmt. W\"ahrend der Testfahrten kam es gelegentlich vor, dass AMCL in einer Kurve die hintere Wand auf die vordere Wand gemapt hat und somit den Weg verschlossen hat.\\
-	Das Verhalten ist abh\"angig von der Qualit\"at der Fahrt und sollte untersucht werden. AMCL\footnote{http://wiki.ros.org/amcl} bringt selbst Parameter mit, die zum Verbessern dieses Verhaltens beitragen k\"onnten.
-\end{itemize}

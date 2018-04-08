@@ -7,7 +7,7 @@ Der Median Flow besteht aus zwei Hauptkomponenten. Im ersten Schritt wird die Be
 \paragraph{Lucas-Kanade-Tracker}
 Der Lucas-Kanade-Tracker basiert auf dem Prinzip des Optischen Flusses \cite{opticalflow}. So kann in einer Bildfolge die neue Position eines Pixels mit dem Zusammenhang
 \begin{align}
-I(x,y,t)=I(x+dx,y+dy,t+dt)
+I(x,y,t)=I(x+\text{d}x,y+\text{d}y,t+\text{d}t)
 \end{align}
 ausgedr\"uckt werden.
 Hierbei beschreibt $I(x,y,t)$ die Intensit\"at eines Pixels an der Position $(x,y)$ zum Zeitpunkt $t$. Durch die Linearisierung mithilfe der Taylorreihenentwicklung ergibt sich die Formel des Optischen Flusses zu
@@ -16,7 +16,7 @@ I_{x}u+I_{y}v+I_{t} = 0
 \end{align}
 mit 
 \begin{align}
-u=\frac{dx}{dt},\ v=\frac{dy}{dt},\ I_{x}=\frac{dI}{dx},\ I_{y}=\frac{dI}{dy},\ I_{t}=\frac{dI}{dt}.
+u=\frac{\text{d}x}{\text{d}t},\ v=\frac{\text{d}y}{\text{d}t},\ I_{x}=\frac{\text{d}I}{\text{d}x},\ I_{y}=\frac{\text{d}I}{\text{d}y},\ I_{t}=\frac{\text{d}I}{\text{d}t}.
 \end{align}
 Nun besteht die Aufgabe die Bewegeung $(u,v)$ zu bestimmen. Dies wird mithilfe einer Erweiterung der Gleichung unter Einbeziehung der benachbarten Pixel in einem $3x3$ Fenster erm\"oglicht. Damit ergibt sich
 \begin{align}
@@ -40,14 +40,14 @@ Die \"uberbestimmte Formel beinhaltet die 9 Pixel $p_{1}...p_{9}$ aus dem $3x3$ 
 \paragraph{Forward/Backward Error}
 Der Lucas-Kanade-Tracker verfolgt ein Pixel über eine Bilderfolge von $k$ Bildern,sodass eine Trajektorie $T^{k}_{f}=(x_{t},x_{t+1},...,x_{t+k})$ bestimmt werden kann. Hierbei steht $f$ f\"ur forward und beschreibt die Forw\"artstrajektorie. Das Ziel ist nun, diese Trajektorie zu validieren. Hierfür wird bei der Position $x_{t+k}$ begonnen und dieses Pixel r\"uckw\"arts über die gegebene Folge von $k$ Bildern verfolgt. So wird eine zweite Trajektorie $T^{k}_{b}=(\hat{x}_{t},\hat{x}_{t+1},...,\hat{x}_{t+k})$ bestimmt, die mit der ersten verglichen wird. Um die Berechnung simpel zu halten, wird die euklidische Distanz
 \begin{align}
-distance(T^{k}_{f},T^{k}_{b})= \left \| x_{t} - \hat{x}_{t} \right \|
+\text{distance}(T^{k}_{f},T^{k}_{b})= \left \| x_{t} - \hat{x}_{t} \right \|
 \end{align} 
 zwischen Start und Endpunkt der jeweiligen Trajektorie als Vergleichsoperator gewählt.
 In Abbildung \ref{fig:ForBackError} wird das Vorgehen zur Bestimmung des Forward/Backward Errors nochmals veranschaulicht. \\
 \begin{figure}[h]
 	\centering
 \includegraphics[width=0.6\textwidth,trim=2.4cm 0cm 0cm 1cm,clip]{pics/ForwardBackwardE.jpg}
-	\caption{Das Vorgehen zur Berechnung des Forward/Backward Errors. (Quelle)}
+	\caption{Das Vorgehen zur Berechnung des Forward/Backward Errors. (aus \cite{forbackerror})}
 	\label{fig:ForBackError}
 \end{figure} \\
 

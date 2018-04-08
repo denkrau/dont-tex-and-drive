@@ -14,12 +14,12 @@ mit $d_{euc} = \sqrt{P_x^2 + P_z^2}$ und $d_P$ als beliebiger Abstand zur Person
 
 Eine Anfahrt dieser Zielkoordinate $\vec{w}$ ist auf zwei Varianten möglich. Die einfachste und ressourcenschonendste ist die Regelung mithilfe eines konventionellen Reglers. Mit der Wahl eines PD-Reglers entspricht diese Variante der hier verwendeten. Dabei muss zum einen der Lenkwinkel mit
 \begin{equation}
-	\delta = K_{P, \delta} \cdot w_x(t) + K_{D, \delta} \frac{w_x(t) - w_x(t-1)}{dt}
+	\delta = K_{P, \delta} \cdot w_x(t) + K_{D, \delta} \frac{w_x(t) - w_x(t-1)}{\text{d}t}
 \end{equation}
 berechnet werden, um die $x$-Koordinate anzufahren. Zum anderen muss die Geschwindigkeit
 \begin{equation}
-	v = K_{P, v} \cdot w_z(t) + K_{D, v} \frac{w_z(t) - w_z(t-1)}{dt}
+	v = K_{P, v} \cdot w_z(t) + K_{D, v} \frac{w_z(t) - w_z(t-1)}{\text{d}t}
 \end{equation}
 berechnet werden, um mit einem flüssigen Fahrverhalten die $z$-Koordinate zu erreichen. Dabei entsprechen $K_{P, \delta}$ und $K_{D, \delta}$ bzw. $K_{P, v}$ und $K_{D, v}$ den jeweiligen Verstärkungsfaktoren, $t$ dem Abtastzeitpunkt und $dt$ der Differenz beider Abtastzeitpunkte. Sofern stationäre Genauigkeit gewünscht ist, müssen die Regelgesetze um einen I-Anteil erweitert werden und eine Implementierung eines Anti-Windups sollte erfolgen.
 
-Als zweite Variante ist die Kombination mit einer Trajektorienplanung möglich. Hier kann der Navigation Stack aus Kapitel \ref{subsec:02navigatinStack} bei gleichbleibender Konfiguration verwendet werden. Das Ziel $\vec{w}$ wird stetig als ROS-Message PoseStamped gesendet, welche direkt als Zielvorgabe dem Planer übergeben werden kann. Somit liegt ein dynamisches Ziel vor, das mit einer Erkennung von möglichen Hindernissen und einer Umgehung dieser angefahren wird. Hierbei ist allerdings zu beachten, dass diese Variante sehr rechenintensiv und auf der aktuellen Hardwarekonfiguration des Fahrzeugs nicht lauffähig ist.
+Als zweite Variante ist die Kombination mit einer Trajektorienplanung möglich. Hier kann der Navigation Stack aus Kapitel \ref{subsubsec:02navigatinStack} bei gleichbleibender Konfiguration verwendet werden. Das Ziel $\vec{w}$ wird stetig als ROS-Message PoseStamped gesendet, welche direkt als Zielvorgabe dem Planer übergeben werden kann. Somit liegt ein dynamisches Ziel vor, das mit einer Erkennung von möglichen Hindernissen und einer Umgehung dieser angefahren wird. Hierbei ist allerdings zu beachten, dass diese Variante sehr rechenintensiv und auf der aktuellen Hardwarekonfiguration des Fahrzeugs nicht lauffähig ist.
