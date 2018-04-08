@@ -36,7 +36,7 @@ Ausgehen von dem globalen Pfad wird ein lokaler Pfad geplant, der auf Hinderniss
 \end{table}
 
 \paragraph{TF}
-Jeder ver\"offentliche Topic wird mit einem Frame markiert. Um die Beziehung zwischen den dazugeh\"origen Koordinatensystemen herzustellen, kann das Package \texttt{TF}\footnote{http://wiki.ros.org/tf\#static\_transform\_publisher} genutzt werden. Darin wird jeweils zwischen zwei Systemen eine Beziehung definiert und somit ein TF-Baum erstellt. Eine Transformation definiert sich durch
+Jedes ver\"offentliche Topic wird mit einem Frame markiert. Um die Beziehung zwischen den dazugeh\"origen Koordinatensystemen herzustellen, kann das Package \texttt{TF}\footnote{http://wiki.ros.org/tf\#static\_transform\_publisher} genutzt werden. Darin wird jeweils zwischen zwei Systemen eine Beziehung definiert und somit ein TF-Baum erstellt. Eine Transformation definiert sich durch
 \lstset{breaklines=true, basicstyle=\small}
 \begin{lstlisting}
  <node pkg="tf" type="static_transform_publisher" name="Select_a_name" args="x y z qx qy qz qw PARENT CHILD 20" />.
@@ -64,7 +64,7 @@ Sobald die grundlegende Struktur funktioniert, hilft das grafische Programm \tex
 Es sei angemerkt, dass ein positiver Wert f\"ur die Stellgr\"o\ss{}e des Lenkwinkels einen Einschlag nach rechts bedeutet, der TEB local planner allerdings mit positiven Werten einen Lenkeinschlag nach links meint.
 
 \paragraph{Hilfreiche Tools}
-F\"ur Testfahren ist es hilfreich das Fahrzeug und einen Laptop mit dem selben WLAN-Netzwerk zu verbinden und per SSH auf das System des Autos zuzugreifen. Dazu wird die IP-Adresse des Fahrzeugs ben\"otigt (\texttt{ifconfig}) und die Verbindung vom Laptop zum Fahrzeug geschieht dann \"uber \texttt{ssh user@IP}. Daf\"ur ist es ratsam einen WLAN-Hotspot, beispielsweise \"uber ein Handy, einzurichten.\\
+F\"ur Testfahren ist es hilfreich das Fahrzeug und einen Laptop mit dem selben WLAN-Netzwerk zu verbinden und per SSH auf das System des Fahrzeugs zuzugreifen. Dazu wird die IP-Adresse des Fahrzeugs ben\"otigt (\texttt{ifconfig}) und die Verbindung vom Laptop zum Fahrzeug geschieht dann \"uber \texttt{ssh user@IP}. Daf\"ur ist es ratsam einen WLAN-Hotspot, beispielsweise \"uber ein Handy, einzurichten.\\
 Mit dem Tool \texttt{dynamic\_reconfigure}\footnote{http://wiki.ros.org/dynamic\_reconfigure} lassen sich Parameter w\"ahrend der Laufzeit ver\"andern. Wurde der Knoten entsprechend konfiguriert, wird der Parameter auf der per SSH verbundenen Konsole mit \texttt{rosrun dynamic\_reconfigure dynparam set NODE PARAMETER VALUE} ge\"andert. Somit kann w\"ahrend einer Testfahrt an der Performance des Fahrzeugs gearbeitet werden, ohne an den Arbeitsplatz zur\"uckkehren zu m\"ussen.\\
 Eine weitere M\"oglichkeit zur Kontrolle \"uber das Netzwerk bietet die Konfiguration verteilter Systeme\footnote{http://wiki.ros.org/ROS/Tutorials/MultipleMachines}. Da ROS ohnehin \"uber Netzwerkstandards kommuniziert, bietet es die Option Topics im Netzwerk zu verteilen. Das bedeutet, dass die Nodes auf dem Fahrzeug gestartet und die Topics auf einem Laptop, der im selben Netzwerk h\"angt, durch RViz visualisiert werden k\"onnen. Dadurch kann w\"ahrend einer Testfahrt mit dem Navigation Stack die Karte und Trajektorie kontrolliert werden. Zudem ist es m\"oglich Ziele zu setzen und die aktuelle Position des Fahrzeugs vorzugeben. Dies geschieht \"uber den Button \texttt{2D Pose Estimate} und dient dazu den Roboter in der Karte zu positionieren. Die Konfiguration auf dem Fahrzeug, sowie auf dem Laptop folgt diesem Schema:
 \begin{lstlisting}
