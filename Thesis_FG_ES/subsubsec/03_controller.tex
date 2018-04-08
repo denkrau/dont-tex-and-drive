@@ -1,16 +1,16 @@
 \subsubsection{Regler}
 \label{subsec:03controller}
-Die jetzt bekannten Koordinaten $\vec{p} = [p_x, p_y, p_z]^T$ der Person sind aus mehrfachen Gründen als finales Ziel ungeeignet. Einerseits ist eine Erkennung der Person schwierig, wenn das Fahrzeug nah an diese heranfährt. Andererseits fährt es bei stationärer Ausregelung stets die Person an. Daher ergibt sich das finale Ziel bzw. die Führungsgröße aus einer radialen Verschiebung der Personenkoordinaten in Richtung der Kamera mittels des Strahlensatzes zu 
+Die jetzt bekannten Koordinaten $\vec{P} = [P_x, P_y, P_z]^T$ der Person sind aus mehrfachen Gründen als finales Ziel ungeeignet. Einerseits ist eine Erkennung der Person schwierig, wenn das Fahrzeug nah an diese heranfährt. Andererseits fährt es bei stationärer Ausregelung stets die Person an. Daher ergibt sich das finale Ziel bzw. die Führungsgröße aus einer radialen Verschiebung der Personenkoordinaten in Richtung der Kamera mittels des Strahlensatzes zu 
 \begin{equation}
 	\vec{w} =
 	\begin{pmatrix}
 		w_x \\w_y \\w_z
 	\end{pmatrix}=
 	\begin{pmatrix}
-		p_x \cdot (1 - d_p / d_{euc})\\ p_y \\ p_z \cdot (1 - d_p / d_{euc})
+		P_x \cdot (1 - d_P / d_{euc})\\ P_y \\ P_z \cdot (1 - d_P / d_{euc})
 	\end{pmatrix}
 \end{equation}
-mit $d_{euc} = \sqrt{p_x^2 + p_z^2}$ und $d_p$ als beliebiger Abstand zur Person. Dabei wird der Abstand zu $d_p = \SI{2.0}{\meter}$ festgelegt, allerdings bietet es sich an, diesen variabel zu gestalten, um zum Beispiel Fahrten um Ecken in schmalen Gängen zu verbessern.
+mit $d_{euc} = \sqrt{P_x^2 + P_z^2}$ und $d_P$ als beliebiger Abstand zur Person. Dabei wird der Abstand zu $d_P = \SI{2.0}{\meter}$ festgelegt, allerdings bietet es sich an, diesen variabel zu gestalten, um zum Beispiel Fahrten um Ecken in schmalen Gängen zu verbessern.
 
 Eine Anfahrt dieser Zielkoordinate $\vec{w}$ ist auf zwei Varianten möglich. Die einfachste und ressourcenschonendste ist die Regelung mithilfe eines konventionellen Reglers. Mit der Wahl eines PD-Reglers entspricht diese Variante der hier verwendeten. Dabei muss zum einen der Lenkwinkel mit
 \begin{equation}
